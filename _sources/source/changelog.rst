@@ -3,7 +3,18 @@ Changelog
 =========
 
 Upcoming version (not yet released)
-------------------------------------
+-----------------------------------
+
+Added
+^^^^^
+
+- Added reward term visualization to the native viewer (toggle with ``P``).
+
+.. figure:: _static/changelog/native_reward.png
+   :width: 80%
+
+Version 1.1.0 (February 12, 2026)
+---------------------------------
 
 Added
 ^^^^^
@@ -47,6 +58,6 @@ Fixed
   Contribution by `@oxkitsune <https://github.com/oxkitsune>`_.
 
 Version 1.0.0 (January 28, 2026)
----------------------------------
+--------------------------------
 
 Initial release of mjlab.
