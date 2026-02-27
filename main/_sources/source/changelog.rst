@@ -17,8 +17,15 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Cloud training support via `SkyPilot <https://skypilot.readthedocs.io/>`_
+  and Lambda Cloud, with documentation covering setup, monitoring, and
+  cost management.
+- W&B hyperparameter sweep scripts that distribute one agent per GPU
+  across a multi-GPU instance.
 - Contributing guide with documentation for shared Claude Code commands
   (``/update-mjwarp``, ``/commit-push-pr``).
+- Added optional ``ViewerConfig.fovy`` and apply it in native viewer camera
+  setup when provided.
 - New ``dr`` module (``mjlab.envs.mdp.dr``) replacing ``randomize_field``
   with typed per-field domain randomization functions. Each function
   automatically recomputes derived fields via ``set_const``. Highlights:
@@ -87,10 +94,19 @@ Changed
 - Replaced the single ``scale`` parameter in ``DifferentialIKActionCfg`` with
   separate ``delta_pos_scale`` and ``delta_ori_scale`` for independent scaling
   of position and orientation components.
+- Improved offscreen multi environment framing by selecting neighboring
+  environments around the focused env instead of first N envs.
+- Tuned tracking task viewer defaults for tighter camera framing.
+- Disabled shadow casting on the G1 tracking light to avoid duplicate
+  stacked shadows when robots are close.
 
 Fixed
 ^^^^^
 
+- Fixed viewer physics loop starving the renderer by replacing the single
+  sim-time budget with a two-clock design (tracked vs actual sim time).
+  Physics now self-corrects after overshooting, keeping FPS smooth at all
+  speed multipliers.
 - Bundled ``ffmpeg`` for ``mediapy`` via ``imageio-ffmpeg``, removing the
   requirement for a system ``ffmpeg`` install. Thanks to
   `@rdeits-bd <https://github.com/rdeits-bd>`_ for the suggestion.
@@ -103,6 +119,12 @@ Fixed
   ``mocap_quat`` (`#645 <https://github.com/mujocolab/mjlab/pull/645>`_).
 - Fixed viser viewer crashing on scenes with no mocap bodies by adding
   an ``nmocap`` guard, matching the native viewer behavior.
+- Fixed offscreen rendering artifacts in large vectorized scenes by applying
+  a render local extent override in ``OffscreenRenderer`` and restoring the
+  original extent on close.
+- Fixed ``RslRlVecEnvWrapper.unwrapped`` to return the base environment,
+  ensuring checkpoint state restore and logging work correctly when wrappers
+  such as ``VideoRecorder`` are enabled.
 
 Version 1.1.1 (February 14, 2026)
 ---------------------------------
