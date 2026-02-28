@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Rewards &#8212; mjlab Documentation</title>
+    <title>Research &#8212; mjlab Documentation</title>
   
   
   
@@ -51,12 +51,12 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'source/rewards';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/research';</script>
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Terminations" href="terminations.html" />
-    <link rel="prev" title="Actions" href="actions.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="FAQ &amp; Troubleshooting" href="faq.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
     <meta name="docbuild:last-update" content="Feb 28, 2026"/>
@@ -169,7 +169,7 @@
 <div class="sidebar-version-switcher">
   <label class="sidebar-version-label" for="version-select">Version</label>
   <select id="version-select" class="sidebar-version-select" onchange="location = this.value;">
-    <option value="rewards.html" selected>main</option>
+    <option value="research.html" selected>main</option>
   </select>
 </div>
 </div>
@@ -198,11 +198,11 @@
 <li class="toctree-l1"><a class="reference internal" href="terrain.html">Terrain</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Manager Layer</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="environment_config.html">Environment Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observations.html">Observations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="actions.html">Actions</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Rewards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rewards.html">Rewards</a></li>
 <li class="toctree-l1"><a class="reference internal" href="terminations.html">Terminations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="events.html">Events</a></li>
@@ -236,11 +236,11 @@
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="motivation.html">Why mjlab?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="migration_isaac_lab.html">Migrating from Isaac Lab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ &amp; Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="research.html">Research</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Research</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -313,7 +313,7 @@
       
       
       
-      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/source/rewards.rst" target="_blank"
+      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/source/research.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -330,7 +330,7 @@
       
       
       
-      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fsource/rewards.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fsource/research.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -360,7 +360,7 @@
       
       
       
-      <li><a href="../_sources/source/rewards.rst" target="_blank"
+      <li><a href="../_sources/source/research.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -444,7 +444,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Rewards</h1>
+    <h1>Research</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -454,9 +454,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-reward-functions">Built-in reward functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-scaling-by-dt">Reward scaling by dt</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-custom-reward-functions">Writing custom reward functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citing-mjlab">Citing mjlab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publications">Publications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projects">Projects</a></li>
 </ul>
             </nav>
         </div>
@@ -468,113 +468,86 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="rewards">
-<span id="id1"></span><h1>Rewards<a class="headerlink" href="#rewards" title="Link to this heading">#</a></h1>
-<p>Rewards are the training signal that shapes policy behavior. Each reward
-term is a function that returns a per-environment scalar every step. The
-reward manager computes a weighted sum of all terms and returns it to
-the training framework.</p>
-<p>Each term is registered by name with a <code class="docutils literal notranslate"><span class="pre">RewardTermCfg</span></code> that carries
-the callable and a <code class="docutils literal notranslate"><span class="pre">weight</span></code>. Negative weights produce penalties.
-Additional keyword arguments are supplied through <code class="docutils literal notranslate"><span class="pre">params</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mjlab.envs.mdp</span><span class="w"> </span><span class="kn">import</span> <span class="n">rewards</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mjlab.managers.reward_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">RewardTermCfg</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mjlab.managers.scene_entity_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">SceneEntityCfg</span>
-
-<span class="n">rewards_cfg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;alive&quot;</span><span class="p">:</span> <span class="n">RewardTermCfg</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">rewards</span><span class="o">.</span><span class="n">is_alive</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
-    <span class="s2">&quot;joint_torques&quot;</span><span class="p">:</span> <span class="n">RewardTermCfg</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">rewards</span><span class="o">.</span><span class="n">joint_torques_l2</span><span class="p">,</span>
-        <span class="n">weight</span><span class="o">=-</span><span class="mf">1e-4</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;asset_cfg&quot;</span><span class="p">:</span> <span class="n">SceneEntityCfg</span><span class="p">(</span><span class="s2">&quot;robot&quot;</span><span class="p">)},</span>
-    <span class="p">),</span>
+  <section id="research">
+<span id="id1"></span><h1>Research<a class="headerlink" href="#research" title="Link to this heading">#</a></h1>
+<section id="citing-mjlab">
+<h2>Citing mjlab<a class="headerlink" href="#citing-mjlab" title="Link to this heading">#</a></h2>
+<p>If you use mjlab in your research, please cite:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">Zakka_mjlab_A_Lightweight_2026</span><span class="p">,</span>
+<span class="w">    </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Zakka, Kevin and Liao, Qiayuan and Yi, Brent and Le Lay, Louis and Sreenath, Koushil and Abbeel, Pieter}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{{mjlab: A Lightweight Framework for GPU-Accelerated Robot Learning}}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://arxiv.org/abs/2601.22074}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="built-in-reward-functions">
-<h2>Built-in reward functions<a class="headerlink" href="#built-in-reward-functions" title="Link to this heading">#</a></h2>
-<p>The functions below are available in <code class="docutils literal notranslate"><span class="pre">mjlab.envs.mdp.rewards</span></code> and are
-shared across tasks. Individual tasks also define their own reward
-functions tailored to the task objective (e.g. velocity tracking for
-locomotion). All reward functions return a tensor of shape
-<code class="docutils literal notranslate"><span class="pre">[num_envs]</span></code>.</p>
+</section>
+<section id="publications">
+<h2>Publications<a class="headerlink" href="#publications" title="Link to this heading">#</a></h2>
+<p>Papers that use mjlab. To add your work, open a pull request or post in
+<a class="reference external" href="https://github.com/mujocolab/mjlab/discussions/categories/show-and-tell">Show and Tell</a>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 28.0%" />
-<col style="width: 72.0%" />
+<col style="width: 60.0%" />
+<col style="width: 30.0%" />
+<col style="width: 10.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Function</p></th>
-<th class="head"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p>Title</p></th>
+<th class="head"><p>Authors</p></th>
+<th class="head"><p>Year</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">is_alive</span></code></p></td>
-<td><p>Returns <code class="docutils literal notranslate"><span class="pre">1.0</span></code> for environments that have not terminated this
-step. Use with a positive weight as a survival bonus.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://arxiv.org/abs/2602.03205">HUSKY: Humanoid Skateboarding System via Physics-Aware Whole-Body Control</a></p></td>
+<td><p>Han, Wang, Zhang, Liu, Luo, Bai, Li</p></td>
+<td><p>2026</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">is_terminated</span></code></p></td>
-<td><p>Returns <code class="docutils literal notranslate"><span class="pre">1.0</span></code> for environments that terminated due to a
-non-timeout condition. Use with a negative weight to penalize
-failure.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">joint_torques_l2</span></code></p></td>
-<td><p>Sum of squared actuator forces. Penalizes energy-intensive
-actions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">joint_vel_l2</span></code></p></td>
-<td><p>Sum of squared joint velocities.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">joint_acc_l2</span></code></p></td>
-<td><p>Sum of squared joint accelerations.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">action_rate_l2</span></code></p></td>
-<td><p>Sum of squared differences between the current and previous
-action. Penalizes rapid changes in the policy output.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">action_acc_l2</span></code></p></td>
-<td><p>Sum of squared second-order action differences. Penalizes
-high-frequency jitter in the action signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">joint_pos_limits</span></code></p></td>
-<td><p>Penalty for joint positions exceeding the soft limits. Zero
-when all joints are within limits.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">posture</span></code> <em>(class)</em></p></td>
-<td><p>Exponential kernel measuring deviation from the default joint
-positions: <code class="docutils literal notranslate"><span class="pre">exp(-mean(error^2</span> <span class="pre">/</span> <span class="pre">std^2))</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">electrical_power_cost</span></code> <em>(class)</em></p></td>
-<td><p>Sum of positive mechanical power consumed by actuators.
-Regenerative power is not penalized.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">flat_orientation_l2</span></code></p></td>
-<td><p>Sum of squares of the x and y components of the projected
-gravity vector in the base frame. Zero when perfectly upright.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://arxiv.org/abs/2602.06827">DynaRetarget: Dynamically-Feasible Retargeting using Sampling-Based
+Trajectory Optimization</a></p></td>
+<td><p>Dhedin, Taouil, Omar, Yu, Tao, Dai, Khadiv</p></td>
+<td><p>2026</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
-<section id="reward-scaling-by-dt">
-<h2>Reward scaling by dt<a class="headerlink" href="#reward-scaling-by-dt" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">ManagerBasedRlEnvCfg.scale_rewards_by_dt</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> by default.
-When enabled, the reward manager multiplies each term by the environment
-step duration before accumulating it. This makes episodic reward totals
-invariant to simulation frequency: a task running at 50 Hz produces the
-same expected episode return as the same task at 200 Hz, because each
-step contributes proportionally less to the total.</p>
-<p>Per-term episodic sums are logged as <code class="docutils literal notranslate"><span class="pre">Episode_Reward/&lt;term_name&gt;</span></code> and
-are always divided by the episode duration, giving a reward rate that is
-comparable across runs with different episode lengths.</p>
-</section>
-<section id="writing-custom-reward-functions">
-<h2>Writing custom reward functions<a class="headerlink" href="#writing-custom-reward-functions" title="Link to this heading">#</a></h2>
-<p>A reward function accepts <code class="docutils literal notranslate"><span class="pre">env</span></code> as its first argument and returns a
-<code class="docutils literal notranslate"><span class="pre">[num_envs]</span></code> tensor. Additional parameters are declared as function
-arguments and supplied via <code class="docutils literal notranslate"><span class="pre">RewardTermCfg(params={...})</span></code>. When a term
-needs to cache setup work or maintain per-episode state, implement it as
-a class. See <a class="reference internal" href="environment_config.html#env-config-term-pattern"><span class="std std-ref">Term configuration pattern</span></a> for the general pattern.</p>
+<section id="projects">
+<h2>Projects<a class="headerlink" href="#projects" title="Link to this heading">#</a></h2>
+<p>Projects built on mjlab. To add yours, open a pull request or post in
+<a class="reference external" href="https://github.com/mujocolab/mjlab/discussions/categories/show-and-tell">Show and Tell</a>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Project</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/menloresearch/asimov-mjlab">menloresearch/asimov-mjlab</a></p></td>
+<td><p>Locomotion fork for the Asimov bipedal robot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/Nagi-ovo/mjlab-homierl">Nagi-ovo/mjlab-homierl</a></p></td>
+<td><p>H1 locomotion across multiple tasks with robustness to upper body disturbances.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/MyoHub/mjlab_myosuite">MyoHub/mjlab_myosuite</a></p></td>
+<td><p>Musculoskeletal simulation integration with MyoSuite.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/MarcDcls/mjlab_upkie">MarcDcls/mjlab_upkie</a></p></td>
+<td><p>Velocity control for the Upkie wheeled biped.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/unitreerobotics/unitree_rl_mjlab">unitreerobotics/unitree_rl_mjlab</a></p></td>
+<td><p>Official Unitree RL environments for Go2, G1, and H1_2.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/Msornerrrr/in-hand-rotation-mjlab">Msornerrrr/in-hand-rotation-mjlab</a></p></td>
+<td><p>Sim to real RL for in hand cube rotation with the LEAP Hand.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 
@@ -590,20 +563,20 @@ a class. See <a class="reference internal" href="environment_config.html#env-con
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="actions.html"
+       href="faq.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Actions</p>
+        <p class="prev-next-title">FAQ &amp; Troubleshooting</p>
       </div>
     </a>
     <a class="right-next"
-       href="terminations.html"
+       href="changelog.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Terminations</p>
+        <p class="prev-next-title">Changelog</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -623,9 +596,9 @@ a class. See <a class="reference internal" href="environment_config.html#env-con
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-reward-functions">Built-in reward functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-scaling-by-dt">Reward scaling by dt</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-custom-reward-functions">Writing custom reward functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citing-mjlab">Citing mjlab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publications">Publications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projects">Projects</a></li>
 </ul>
   </nav></div>
 
