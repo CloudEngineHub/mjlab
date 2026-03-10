@@ -5,12 +5,36 @@ Changelog
 Upcoming version (not yet released)
 -----------------------------------
 
+Added
+^^^^^
+
+- Added ``DelayedBuiltinActuatorGroup`` that fuses delayed builtin actuators
+  sharing the same delay configuration into a single buffer operation.
+- NaN guard now captures mocap body poses (``mocap_pos``, ``mocap_quat``)
+  when the model has mocap bodies, enabling full state reconstruction in
+  the dump viewer for fixed-base entities.
+
+Changed
+^^^^^^^
+
+- ``Entity.clear_state()`` is deprecated. Use ``Entity.reset()`` instead.
+  ``clear_state`` only zeroed actuator targets without resetting actuator
+  internal state (e.g. delay buffers), which could cause stale commands
+  after teleporting the robot to a new pose.
+
 Fixed
 ^^^^^
 
+- ``dr.pseudo_inertia`` no longer loads cuSOLVER, eliminating ~4 GB of
+  persistent GPU memory overhead. Cholesky and eigendecomposition are now
+  computed analytically for the small matrices involved (4x4 and 3x3)
+  (:issue:`753`).
 - Set terrain geom mass to zero so that the static terrain body does not
   inflate ``stat.meanmass``, which made force arrow visualization invisible
   on rough terrain (:issue:`734`, :issue:`537`).
+- Native viewer now syncs ``qpos0`` when domain randomized, fixing incorrect
+  body positions after ``dr.joint_default_pos`` randomization
+  (:issue:`760`).
 
 Version 1.2.0 (March 6, 2026)
 -----------------------------
