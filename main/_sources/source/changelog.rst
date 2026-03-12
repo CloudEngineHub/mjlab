@@ -8,6 +8,10 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Added :ref:`motion imitation <motion-imitation>` documentation with
+  preprocessing instructions. The README now links here instead of the
+  BeyondMimic repository, which produced incompatible NPZ files when used
+  with mjlab (:issue:`777`).
 - Added ``margin``, ``gap``, and ``solmix`` fields to ``CollisionCfg``
   for per geom contact parameter configuration (:issue:`766`).
 - Added ``DelayedBuiltinActuatorGroup`` that fuses delayed builtin actuators
@@ -15,6 +19,13 @@ Added
 - NaN guard now captures mocap body poses (``mocap_pos``, ``mocap_quat``)
   when the model has mocap bodies, enabling full state reconstruction in
   the dump viewer for fixed-base entities.
+- Implemented ``ActionTermCfg.clip`` for clamping processed actions after
+  scale and offset (:issue:`771`).
+- Added ``qfrc_actuator`` and ``qfrc_external`` generalized force accessors
+  to ``EntityData``. ``qfrc_actuator`` gives actuator forces in joint space
+  (projected through the transmission). ``qfrc_external`` recovers the
+  generalized force from body external wrenches (``xfrc_applied``)
+  (:issue:`776`).
 
 Changed
 ^^^^^^^
@@ -25,10 +36,17 @@ Changed
   ``clear_state`` only zeroed actuator targets without resetting actuator
   internal state (e.g. delay buffers), which could cause stale commands
   after teleporting the robot to a new pose.
+- Removed ``EntityData.generalized_force``. The property was bugged (indexed
+  free joint DOFs instead of articulated DOFs) and the name was ambiguous.
+  Use ``qfrc_actuator`` or ``qfrc_external`` instead (:issue:`776`).
 
 Fixed
 ^^^^^
 
+- ``electrical_power_cost`` now uses ``qfrc_actuator`` (joint space) instead
+  of ``actuator_force`` (actuation space) for mechanical power computation.
+  Previously the reward was incorrect for actuators with gear ratios other
+  than 1 (:issue:`776`).
 - ``dr.pseudo_inertia`` no longer loads cuSOLVER, eliminating ~4 GB of
   persistent GPU memory overhead. Cholesky and eigendecomposition are now
   computed analytically for the small matrices involved (4x4 and 3x3)
@@ -43,6 +61,11 @@ Fixed
   derived command state (e.g. relative body positions in tracking
   environments) is populated before the first observation is returned
   (:issue:`761`).
+- ``RayCastSensor`` with ``ray_alignment="yaw"`` or ``"world"`` now correctly
+  aligns the frame offset when attached to a site or geom with a local offset
+  from its parent body. Previously only ray directions and pattern offsets were
+  aligned, causing the frame position to swing with body pitch/roll
+  (:issue:`775`).
 
 Version 1.2.0 (March 6, 2026)
 -----------------------------
