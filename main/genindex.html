@@ -56,7 +56,7 @@
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Mar 30, 2026"/>
+    <meta name="docbuild:last-update" content="Mar 31, 2026"/>
   </head>
   
   
@@ -576,10 +576,10 @@ document.write(`
 </li>
       <li><a href="source/api/entity.html#mjlab.entity.EntityArticulationInfoCfg.actuators">actuators (mjlab.entity.EntityArticulationInfoCfg attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/api/terrains.html#mjlab.terrains.BoxRandomSpreadTerrainCfg.add_floor">add_floor (mjlab.terrains.BoxRandomSpreadTerrainCfg attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/api/terrains.html#mjlab.terrains.TerrainGeneratorCfg.add_lights">add_lights (mjlab.terrains.TerrainGeneratorCfg attribute)</a>
 </li>
       <li><a href="source/api/rl.html#mjlab.rl.RslRlOnPolicyRunnerCfg.algorithm">algorithm (mjlab.rl.RslRlOnPolicyRunnerCfg attribute)</a>
@@ -596,6 +596,12 @@ document.write(`
 </li>
       <li><a href="source/api/actuator.html#mjlab.actuator.Actuator.apply_delay">apply_delay() (mjlab.actuator.Actuator method)</a>
 </li>
+      <li><a href="source/api/managers.html#mjlab.managers.CommandManager.apply_gui_reset">apply_gui_reset() (mjlab.managers.CommandManager method)</a>
+
+      <ul>
+        <li><a href="source/api/managers.html#mjlab.managers.CommandTerm.apply_gui_reset">(mjlab.managers.CommandTerm method)</a>
+</li>
+      </ul></li>
       <li><a href="source/api/actuator.html#mjlab.actuator.ActuatorCfg.armature">armature (mjlab.actuator.ActuatorCfg attribute)</a>
 </li>
       <li><a href="source/api/entity.html#mjlab.entity.EntityCfg.articulation">articulation (mjlab.entity.EntityCfg attribute)</a>
@@ -1340,6 +1346,8 @@ document.write(`
 </li>
       <li><a href="source/api/sensor.html#mjlab.sensor.SensorContext.get_rgb">get_rgb() (mjlab.sensor.SensorContext method)</a>
 </li>
+      <li><a href="source/api/sensor.html#mjlab.sensor.SensorContext.get_segmentation">get_segmentation() (mjlab.sensor.SensorContext method)</a>
+</li>
       <li><a href="source/api/managers.html#mjlab.managers.EventManager.get_term_cfg">get_term_cfg() (mjlab.managers.EventManager method)</a>
 </li>
       <li><a href="source/api/managers.html#mjlab.managers.RewardManager.get_visualizable_terms">get_visualizable_terms() (mjlab.managers.RewardManager method)</a>
@@ -1898,16 +1906,22 @@ document.write(`
 </li>
       <li><a href="source/api/terrains.html#mjlab.terrains.HfDiscreteObstaclesTerrainCfg.obstacle_height_mode">obstacle_height_mode (mjlab.terrains.HfDiscreteObstaclesTerrainCfg attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/api/terrains.html#mjlab.terrains.HfDiscreteObstaclesTerrainCfg.obstacle_height_range">obstacle_height_range (mjlab.terrains.HfDiscreteObstaclesTerrainCfg attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/api/terrains.html#mjlab.terrains.HfDiscreteObstaclesTerrainCfg.obstacle_width_range">obstacle_width_range (mjlab.terrains.HfDiscreteObstaclesTerrainCfg attribute)</a>
 </li>
       <li><a href="source/api/terrains.html#mjlab.terrains.HfPerlinNoiseTerrainCfg.octaves">octaves (mjlab.terrains.HfPerlinNoiseTerrainCfg attribute)</a>
 </li>
       <li><a href="source/api/viewer.html#mjlab.viewer.OffscreenRenderer">OffscreenRenderer (class in mjlab.viewer)</a>
 </li>
+      <li><a href="source/api/managers.html#mjlab.managers.CommandManager.on_viewer_pause">on_viewer_pause() (mjlab.managers.CommandManager method)</a>
+
+      <ul>
+        <li><a href="source/api/managers.html#mjlab.managers.CommandTerm.on_viewer_pause">(mjlab.managers.CommandTerm method)</a>
+</li>
+      </ul></li>
       <li><a href="source/api/rl.html#mjlab.rl.RslRlPpoAlgorithmCfg.optimizer">optimizer (mjlab.rl.RslRlPpoAlgorithmCfg attribute)</a>
 </li>
       <li><a href="source/api/viewer.html#mjlab.viewer.ViewerConfig.origin_type">origin_type (mjlab.viewer.ViewerConfig attribute)</a>
@@ -2232,6 +2246,8 @@ document.write(`
         <li><a href="source/api/terrains.html#mjlab.terrains.TerrainGeneratorCfg.seed">(mjlab.terrains.TerrainGeneratorCfg attribute)</a>
 </li>
       </ul></li>
+      <li><a href="source/api/sensor.html#mjlab.sensor.CameraSensorData.segmentation">segmentation (mjlab.sensor.CameraSensorData attribute)</a>
+</li>
       <li><a href="source/api/sim.html#mjlab.sim.Simulation.sense">sense() (mjlab.sim.Simulation method)</a>
 </li>
       <li><a href="source/api/sensor.html#mjlab.sensor.Sensor">Sensor (class in mjlab.sensor)</a>
@@ -2692,7 +2708,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Mar 30, 2026.
+  Last updated on Mar 31, 2026.
   <br/>
 </p>
   </div>

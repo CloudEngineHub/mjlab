@@ -39,6 +39,10 @@ Added
 - Added a Checkpoints tab to the Viser play viewer for hot-swapping
   checkpoints without restarting. Works with local directories and W&B
   runs (:issue:`751`). Contribution by @omarrayyann.
+- Added ``"segmentation"`` camera data type for per-pixel geom ID output
+  alongside RGB and depth, and a multi-cube goal-conditioned lifting task
+  (``Mjlab-Multi-Cube-Seg-Yam``) that uses it (:issue:`862`).
+  Contribution by @pthangeda.
 
 Changed
 ^^^^^^^
@@ -79,6 +83,9 @@ Changed
 Fixed
 ^^^^^
 
+- Fixed ONNX export path resolution in the velocity, manipulation, and
+  tracking runners when a parent directory name contains the word
+  ``"model"`` (:issue:`867`). Contribution by @gokulp01.
 - ``export-scene`` now writes only referenced assets and places them
   correctly under the output directory. Previously, asset keys containing
   path traversal could write files outside the output directory, and all
