@@ -8,6 +8,8 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Added :func:`~mjlab.envs.mdp.dr.pair_friction` for randomizing geom-pair
+  friction overrides (``pair_friction`` in ``mjModel``).
 - Added ``STAIRS_TERRAINS_CFG`` terrain preset for progressive stair
   curriculum training and ``@terrain_preset`` decorator for composing
   terrain configurations from reusable presets.
@@ -36,6 +38,8 @@ Added
   once per physics substep inside the decimation loop. The per substep
   values are averaged within each environment step, so episode averages
   remain comparable to regular per step metrics.
+- Added ``project-instinct/InstinctMJ`` to the research page's list of
+  projects built on mjlab.
 - Added a Checkpoints tab to the Viser play viewer for hot-swapping
   checkpoints without restarting. Works with local directories and W&B
   runs (:issue:`751`). Contribution by @omarrayyann.
@@ -83,6 +87,8 @@ Changed
 Fixed
 ^^^^^
 
+- Fixed ``SceneEntityCfg`` names and IDs ordering mismatch when
+  ``preserve_order=False`` (:issue:`876`). Contribution by @jsw7460.
 - Fixed ONNX export path resolution in the velocity, manipulation, and
   tracking runners when a parent directory name contains the word
   ``"model"`` (:issue:`867`). Contribution by @gokulp01.
