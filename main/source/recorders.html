@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Curriculum &#8212; mjlab Documentation</title>
+    <title>Recorders &#8212; mjlab Documentation</title>
   
   
   
@@ -51,12 +51,12 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'source/curriculum';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/recorders';</script>
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Metrics" href="metrics.html" />
-    <link rel="prev" title="Domain Randomization" href="randomization.html" />
+    <link rel="next" title="Training with RSL-RL" href="training/rsl_rl.html" />
+    <link rel="prev" title="Metrics" href="metrics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
     <meta name="docbuild:last-update" content="May 18, 2026"/>
@@ -169,7 +169,7 @@
 <div class="sidebar-version-switcher">
   <label class="sidebar-version-label" for="version-select">Version</label>
   <select id="version-select" class="sidebar-version-select" onchange="location = this.value;">
-    <option value="curriculum.html" selected>main</option>
+    <option value="recorders.html" selected>main</option>
   </select>
 </div>
 </div>
@@ -211,9 +211,9 @@
 <li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="events.html">Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="randomization.html">Domain Randomization</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curriculum.html">Curriculum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metrics.html">Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recorders.html">Recorders</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Recorders</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Training &amp; Debugging</span></p>
 <ul class="nav bd-sidenav">
@@ -322,7 +322,7 @@
       
       
       
-      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/source/curriculum.rst" target="_blank"
+      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/source/recorders.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -339,7 +339,7 @@
       
       
       
-      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fsource/curriculum.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fsource/recorders.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -369,7 +369,7 @@
       
       
       
-      <li><a href="../_sources/source/curriculum.rst" target="_blank"
+      <li><a href="../_sources/source/recorders.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -453,7 +453,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Curriculum</h1>
+    <h1>Recorders</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -463,11 +463,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-curriculum-functions">Built-in curriculum functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-curriculum">Reward curriculum</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-curriculum">Termination curriculum</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terrain-curriculum">Terrain curriculum</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-custom-curriculum-functions">Writing custom curriculum functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lifecycle-hooks">Lifecycle hooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-a-recorder-term">Writing a recorder term</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registration">Registration</a></li>
 </ul>
             </nav>
         </div>
@@ -479,171 +477,110 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="curriculum">
-<span id="id1"></span><h1>Curriculum<a class="headerlink" href="#curriculum" title="Link to this heading">#</a></h1>
-<p>The curriculum manager adjusts training conditions based on policy
-performance. Training begins with an easier problem and difficulty
-increases as the policy demonstrates it can handle the current
-conditions. Common uses include advancing robots to harder terrain,
-widening command velocity ranges, and ramping reward penalty weights
-over the course of training.</p>
-<p>Curriculum terms are called at each environment reset. Each term
-receives the environment and the set of resetting environment IDs,
-examines some performance signal, and applies changes to environment
-parameters directly.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mjlab.managers.curriculum_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">CurriculumTermCfg</span>
+  <section id="recorders">
+<span id="id1"></span><h1>Recorders<a class="headerlink" href="#recorders" title="Link to this heading">#</a></h1>
+<p>The recorder manager provides lifecycle hooks for logging data during
+rollouts. Unlike rewards, recorders have no effect on the optimization
+loop. They exist purely to let you capture observations, actions, or any
+other environment state without modifying mjlab internals.</p>
+<p>Each recorder term is a class that you implement. mjlab calls its methods
+at the right moments and leaves all I/O decisions to you. If the <code class="docutils literal notranslate"><span class="pre">recorders</span></code>
+dictionary on <code class="docutils literal notranslate"><span class="pre">ManagerBasedRlEnvCfg</span></code> is empty, the environment substitutes a
+lightweight no-op manager with zero overhead.</p>
+<section id="lifecycle-hooks">
+<h2>Lifecycle hooks<a class="headerlink" href="#lifecycle-hooks" title="Link to this heading">#</a></h2>
+<p>The manager exposes three hooks per term:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">record_pre_reset(env_ids)</span></code></dt><dd><p>Called inside <code class="docutils literal notranslate"><span class="pre">env.step()</span></code> before terminated environments are reset.
+<code class="docutils literal notranslate"><span class="pre">obs_buf</span></code> holds the observation from the end of the <em>previous</em> step
+(the input the agent used to choose the terminal action, not the
+post-action terminal state). <code class="docutils literal notranslate"><span class="pre">action_manager.action</span></code> holds the
+terminal action and is still valid here; it will be zeroed for these
+environments by <code class="docutils literal notranslate"><span class="pre">_reset_idx</span></code> immediately after. <code class="docutils literal notranslate"><span class="pre">reward_buf</span></code> holds
+the terminal reward. This is the right place to record the terminal
+transition <code class="docutils literal notranslate"><span class="pre">(obs_t,</span> <span class="pre">action_t,</span> <span class="pre">reward_t,</span> <span class="pre">done=True)</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">record_post_reset(env_ids)</span></code></dt><dd><p>Called after a reset completes and fresh observations are available.
+Fires at the end of <code class="docutils literal notranslate"><span class="pre">env.reset()</span></code> (all environments) and within
+<code class="docutils literal notranslate"><span class="pre">env.step()</span></code> after each batch of terminated environments is reset.
+<code class="docutils literal notranslate"><span class="pre">obs_buf[env_ids]</span></code> holds the initial observation of the new episode;
+<code class="docutils literal notranslate"><span class="pre">action_manager.action[env_ids]</span></code> is zero. Use this to initialize
+per-episode state or record the first observation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">record_post_step()</span></code></dt><dd><p>Called at the end of every <code class="docutils literal notranslate"><span class="pre">env.step()</span></code> with fresh observations.
+For environments that reset during this step, <code class="docutils literal notranslate"><span class="pre">action_manager.action</span></code>
+has been zeroed and <code class="docutils literal notranslate"><span class="pre">obs_buf</span></code> holds the initial state of the new
+episode rather than the post-action terminal observation. Use
+<code class="docutils literal notranslate"><span class="pre">record_pre_reset</span></code> for those environments’ terminal transitions and
+<code class="docutils literal notranslate"><span class="pre">self._env.reset_buf</span></code> to identify which environments reset.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">close()</span></code></dt><dd><p>Called when the environment closes. Release file handles and flush
+buffers here.</p>
+</dd>
+</dl>
+</section>
+<section id="writing-a-recorder-term">
+<h2>Writing a recorder term<a class="headerlink" href="#writing-a-recorder-term" title="Link to this heading">#</a></h2>
+<p>Subclass <a class="reference internal" href="api/managers.html#mjlab.managers.RecorderTerm" title="mjlab.managers.RecorderTerm"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecorderTerm</span></code></a> and override whichever
+hooks you need. The environment is available as <code class="docutils literal notranslate"><span class="pre">self._env</span></code>, giving
+access to <code class="docutils literal notranslate"><span class="pre">self._env.obs_buf</span></code>, <code class="docutils literal notranslate"><span class="pre">self._env.action_manager.action</span></code>, and
+all other managers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mjlab.managers</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecorderTerm</span><span class="p">,</span> <span class="n">RecorderTermCfg</span>
 
-<span class="n">curriculum</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;terrain_levels&quot;</span><span class="p">:</span> <span class="n">CurriculumTermCfg</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">mdp</span><span class="o">.</span><span class="n">terrain_levels_vel</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;command_name&quot;</span><span class="p">:</span> <span class="s2">&quot;twist&quot;</span><span class="p">},</span>
-    <span class="p">),</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>The return value of a curriculum function is logged under
-<code class="docutils literal notranslate"><span class="pre">Curriculum/&lt;term_name&gt;</span></code> in the training metrics.</p>
-<section id="built-in-curriculum-functions">
-<h2>Built-in curriculum functions<a class="headerlink" href="#built-in-curriculum-functions" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 24.0%" />
-<col style="width: 76.0%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Function</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">terrain_levels_vel</span></code></p></td>
-<td><p>Measures how far each robot traveled during the episode. Robots
-that covered enough distance move up one difficulty row in the
-terrain grid; those that fell short move down. See the terrain
-curriculum section below.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">commands_vel</span></code></p></td>
-<td><p>Widens velocity command ranges based on training step count.
-Each stage specifies a step threshold and the new ranges to
-apply once that threshold is exceeded.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reward_curriculum</span></code></p></td>
-<td><p>Adjusts a reward term’s weight and/or params according to
-training step thresholds. Replaces the older <code class="docutils literal notranslate"><span class="pre">reward_weight</span></code>
-function and also supports modifying reward function parameters.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">termination_curriculum</span></code></p></td>
-<td><p>Adjusts a termination term’s params according to training step
-thresholds. Useful for gradually tightening termination
-conditions (e.g. energy limits) as training progresses.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="reward-curriculum">
-<h2>Reward curriculum<a class="headerlink" href="#reward-curriculum" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">reward_curriculum</span></code> schedules changes to a reward term’s weight or
-keyword arguments as training progresses. Each stage specifies a
-<code class="docutils literal notranslate"><span class="pre">step</span></code> threshold and an optional <code class="docutils literal notranslate"><span class="pre">weight</span></code> or <code class="docutils literal notranslate"><span class="pre">params</span></code> update.
-Stages are evaluated in order, and each one whose threshold has been
-reached is applied.</p>
-<p><strong>Ramping a penalty weight</strong></p>
-<p>A common pattern is to introduce a penalty term at low weight early in
-training and increase it once the policy has learned the basics:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mjlab.managers.curriculum_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">CurriculumTermCfg</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CsvRecorder</span><span class="p">(</span><span class="n">RecorderTerm</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">],</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">)</span>
 
-<span class="n">curriculum</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;joint_vel_hinge_weight&quot;</span><span class="p">:</span> <span class="n">CurriculumTermCfg</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">mdp</span><span class="o">.</span><span class="n">reward_curriculum</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;reward_name&quot;</span><span class="p">:</span> <span class="s2">&quot;joint_vel_hinge&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;stages&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">},</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">12000</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">},</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">24000</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">},</span>
-            <span class="p">],</span>
-        <span class="p">},</span>
-    <span class="p">),</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Adjusting reward parameters</strong></p>
-<p>You can also change the parameters passed to the reward function. For
-example, tightening a tracking tolerance as training progresses:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">curriculum</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;track_lin_vel_tighten&quot;</span><span class="p">:</span> <span class="n">CurriculumTermCfg</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">mdp</span><span class="o">.</span><span class="n">reward_curriculum</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;reward_name&quot;</span><span class="p">:</span> <span class="s2">&quot;track_linear_velocity&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;stages&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}},</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">20000</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">}},</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}},</span>
-            <span class="p">],</span>
-        <span class="p">},</span>
-    <span class="p">),</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Combining weight and params</strong></p>
-<p>A single stage can update both weight and params at once:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">24000</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;max_vel&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}}</span>
-</pre></div>
-</div>
-</section>
-<section id="termination-curriculum">
-<h2>Termination curriculum<a class="headerlink" href="#termination-curriculum" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">termination_curriculum</span></code> schedules changes to a termination term’s
-parameters as training progresses. This is useful for gradually
-tightening termination conditions once the policy has learned basic
-behaviors.</p>
-<p><strong>Tightening an energy limit</strong></p>
-<p>Start with a permissive energy threshold and reduce it over training:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mjlab.managers.curriculum_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">CurriculumTermCfg</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_pre_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_ids</span><span class="p">):</span>
+        <span class="c1"># Terminal transition: action is still intact here.</span>
+        <span class="c1"># It will be zeroed by _reset_idx immediately after this returns.</span>
+        <span class="n">obs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">obs_buf</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="n">env_ids</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">act</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">action_manager</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="n">env_ids</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">act</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 
-<span class="n">curriculum</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;energy_threshold&quot;</span><span class="p">:</span> <span class="n">CurriculumTermCfg</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">mdp</span><span class="o">.</span><span class="n">termination_curriculum</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;termination_name&quot;</span><span class="p">:</span> <span class="s2">&quot;energy&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;stages&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">12000</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">}},</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">24000</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="mf">700.0</span><span class="p">}},</span>
-                <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">36000</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="mf">400.0</span><span class="p">}},</span>
-            <span class="p">],</span>
-        <span class="p">},</span>
-    <span class="p">),</span>
-<span class="p">}</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_post_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Skip envs that just reset: their terminal pair was written</span>
+        <span class="c1"># in record_pre_reset and their action is now zeroed.</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">reset_buf</span>
+        <span class="n">obs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">obs_buf</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">act</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">action_manager</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">act</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">time_out</span></code> field on <code class="docutils literal notranslate"><span class="pre">TerminationTermCfg</span></code> can also be toggled
-via stages if needed, though this is uncommon in practice.</p>
+<p>The term receives the full <code class="docutils literal notranslate"><span class="pre">cfg</span></code> object so it can read any values you
+put in <code class="docutils literal notranslate"><span class="pre">cfg.params</span></code>.</p>
 </section>
-<section id="terrain-curriculum">
-<h2>Terrain curriculum<a class="headerlink" href="#terrain-curriculum" title="Link to this heading">#</a></h2>
-<p>The terrain grid used with procedural terrain is a
-<code class="docutils literal notranslate"><span class="pre">num_rows</span> <span class="pre">x</span> <span class="pre">num_cols</span></code> matrix of patches. Columns represent terrain
-type variants; rows represent difficulty levels, with row 0 being the
-easiest and row <code class="docutils literal notranslate"><span class="pre">num_rows</span> <span class="pre">-</span> <span class="pre">1</span></code> the hardest. When
-<code class="docutils literal notranslate"><span class="pre">TerrainGeneratorCfg.curriculum=True</span></code>, each column is assigned exactly
-one terrain type so that difficulty increases monotonically along rows.</p>
-<p>At environment construction each environment is assigned a random
-starting row within <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">max_init_terrain_level]</span></code>. The
-<code class="docutils literal notranslate"><span class="pre">terrain_levels_vel</span></code> curriculum term promotes or demotes environments
-on each reset based on distance traveled during the episode.
-Environments that reach the maximum level are randomly reassigned to
-any row, maintaining coverage across all difficulty levels. See
-<a class="reference internal" href="terrain.html#terrain"><span class="std std-ref">Terrain</span></a> for details on configuring the terrain grid itself.</p>
-</section>
-<section id="writing-custom-curriculum-functions">
-<h2>Writing custom curriculum functions<a class="headerlink" href="#writing-custom-curriculum-functions" title="Link to this heading">#</a></h2>
-<p>A curriculum function accepts <code class="docutils literal notranslate"><span class="pre">env</span></code> and <code class="docutils literal notranslate"><span class="pre">env_ids</span></code>, applies
-parameter changes, and returns a value to log (a scalar tensor, a dict
-of tensors, or <code class="docutils literal notranslate"><span class="pre">None</span></code>). A typical implementation reads a performance
-metric, decides whether to increase or decrease difficulty, mutates the
-relevant configuration in place, and returns the current difficulty
-level. See <a class="reference internal" href="environment_config.html#env-config-term-pattern"><span class="std std-ref">Term configuration pattern</span></a> for the general pattern.</p>
+<section id="registration">
+<h2>Registration<a class="headerlink" href="#registration" title="Link to this heading">#</a></h2>
+<p>Add the term to the <code class="docutils literal notranslate"><span class="pre">recorders</span></code> dictionary on your environment config:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mjlab.managers</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecorderTermCfg</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyEnvCfg</span><span class="p">(</span><span class="n">SomeTaskEnvCfg</span><span class="p">):</span>
+    <span class="n">recorders</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;csv&quot;</span><span class="p">:</span> <span class="n">RecorderTermCfg</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">=</span><span class="n">CsvRecorder</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;rollout.csv&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+<p>Multiple terms can be registered under different keys and run together.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">func</span></code> must be a <a class="reference internal" href="api/managers.html#mjlab.managers.RecorderTerm" title="mjlab.managers.RecorderTerm"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecorderTerm</span></code></a> subclass.
+Function-based terms are not supported because recorder terms are
+stateful.</p>
+</div>
 </section>
 </section>
 
@@ -659,20 +596,20 @@ level. See <a class="reference internal" href="environment_config.html#env-confi
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="randomization.html"
+       href="metrics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Domain Randomization</p>
+        <p class="prev-next-title">Metrics</p>
       </div>
     </a>
     <a class="right-next"
-       href="metrics.html"
+       href="training/rsl_rl.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Metrics</p>
+        <p class="prev-next-title">Training with RSL-RL</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -692,11 +629,9 @@ level. See <a class="reference internal" href="environment_config.html#env-confi
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-curriculum-functions">Built-in curriculum functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-curriculum">Reward curriculum</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-curriculum">Termination curriculum</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terrain-curriculum">Terrain curriculum</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-custom-curriculum-functions">Writing custom curriculum functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lifecycle-hooks">Lifecycle hooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-a-recorder-term">Writing a recorder term</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registration">Registration</a></li>
 </ul>
   </nav></div>
 
