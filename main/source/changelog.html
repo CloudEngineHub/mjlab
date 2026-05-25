@@ -58,7 +58,7 @@
     <link rel="prev" title="Research" href="research.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="May 24, 2026"/>
+    <meta name="docbuild:last-update" content="May 25, 2026"/>
   </head>
   
   
@@ -511,6 +511,12 @@ document.write(`
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">mdp.projected_gravity_from_sensor</span></code>, an observation that derives
+projected gravity from a <code class="docutils literal notranslate"><span class="pre">framezaxis</span></code> up-vector sensor (negated) rather
+than from the root body orientation. Unlike <code class="docutils literal notranslate"><span class="pre">mdp.projected_gravity</span></code>, it
+reflects the sensor’s site frame, so it can observe IMU mounting domain
+randomization (e.g. via <code class="docutils literal notranslate"><span class="pre">dr.site_quat</span></code>). Go1 and G1 ship an
+<code class="docutils literal notranslate"><span class="pre">imu_upvector</span></code> sensor for this.</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">DebugVisualizer.add_box</span></code> for drawing an axis-oriented box
 primitive, mirroring <code class="docutils literal notranslate"><span class="pre">add_ellipsoid</span></code>. Supported by both the native
 and Viser viewers. <code class="docutils literal notranslate"><span class="pre">size</span></code> is the box half-extents (<a class="extlink-issue reference external" href="https://github.com/mujocolab/mjlab/issues/992">#992</a>).</p></li>
@@ -552,6 +558,11 @@ Contribution by &#64;omarrayyann.</p></li>
 <section id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Changed <code class="docutils literal notranslate"><span class="pre">compute_root_relative_mpkpe</span></code> to re-anchor the reference to the
+robot’s root each step, removing yaw drift as well as translation so it
+measures intrinsic body pose error.</p></li>
+<li><p>Changed <code class="docutils literal notranslate"><span class="pre">compute_joint_velocity_error</span></code> from an L2 norm to a per-joint
+RMS, so it no longer scales with the number of joints.</p></li>
 <li><p>Bumped <code class="docutils literal notranslate"><span class="pre">mujoco</span></code> to 3.8 and <code class="docutils literal notranslate"><span class="pre">mujoco-warp</span></code> to 3.8.0. The <code class="docutils literal notranslate"><span class="pre">multiccd</span></code>
 enable flag was removed in mujoco 3.8 (it became default-on), so configs
 that listed <code class="docutils literal notranslate"><span class="pre">&quot;multiccd&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">MujocoCfg.enableflags</span></code> need to drop it.</p></li>
@@ -583,16 +594,35 @@ Contribution by &#64;saikishor.</p></li>
 air-time fields (<code class="docutils literal notranslate"><span class="pre">current_air_time</span></code>, <code class="docutils literal notranslate"><span class="pre">last_air_time</span></code>,
 <code class="docutils literal notranslate"><span class="pre">current_contact_time</span></code>, <code class="docutils literal notranslate"><span class="pre">last_contact_time</span></code>) have shape <code class="docutils literal notranslate"><span class="pre">[B,</span> <span class="pre">P]</span></code>,
 where <code class="docutils literal notranslate"><span class="pre">P</span></code> is the number of resolved primaries (<a class="extlink-issue reference external" href="https://github.com/mujocolab/mjlab/issues/914">#914</a>).</p></li>
+<li><p>Event functions now share a single <code class="docutils literal notranslate"><span class="pre">resolve_env_ids</span></code> helper to expand
+<code class="docutils literal notranslate"><span class="pre">env_ids=None</span></code> to all environments, replacing five copies of the same
+guard. <code class="docutils literal notranslate"><span class="pre">push_by_setting_velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">apply_external_force_torque</span></code>
+accept <code class="docutils literal notranslate"><span class="pre">env_ids=None</span></code> too, so they work as global-time interval terms.
+Documented when to use <code class="docutils literal notranslate"><span class="pre">apply_external_force_torque</span></code> (a constant,
+self-managed wrench) versus <code class="docutils literal notranslate"><span class="pre">apply_body_impulse</span></code> (transient, automatic
+impulses) versus <code class="docutils literal notranslate"><span class="pre">push_by_setting_velocity</span></code> (an instantaneous velocity
+kick).</p></li>
 </ul>
 </section>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Fixed the tracking <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> script scoring each metric against the
+next motion frame; the reference is now snapshotted before each step to
+match the reward.</p></li>
+<li><p>Fixed the tracking end-effector metrics silently scoring zero for an
+unknown body name; they now raise <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">compute_mpkpe</span></code> measuring root-relative instead of global error;
+it now uses the global reference <code class="docutils literal notranslate"><span class="pre">body_pos_w</span></code> (<a class="extlink-issue reference external" href="https://github.com/mujocolab/mjlab/issues/1006">#1006</a>).</p></li>
 <li><p>Fixed heavy flicker in offscreen training videos on rough-terrain tasks.
 The renderer recomputed its context “neighbor” robots every frame from
 <code class="docutils literal notranslate"><span class="pre">env_origins</span></code>, which the terrain curriculum mutates on reset, so the
 neighbor set kept changing and robots popped in and out. The neighbor
 set is now computed once and cached (<a class="extlink-issue reference external" href="https://github.com/mujocolab/mjlab/issues/979">#979</a>).</p></li>
+<li><p>Fixed command delay only applying to an actuator’s position target.
+<code class="docutils literal notranslate"><span class="pre">IdealPdActuator</span></code> and <code class="docutils literal notranslate"><span class="pre">DcMotorActuator</span></code> also use velocity and effort, which
+arrived undelayed and out of sync; all command targets now share one delay.
+Zero-reference setups are unaffected.</p></li>
 <li><p>Fixed duplicate random seeds across nodes in multi-node training. The
 per-process seed offset in <code class="docutils literal notranslate"><span class="pre">scripts/train.py</span></code> now uses the global
 <code class="docutils literal notranslate"><span class="pre">RANK</span></code> instead of <code class="docutils literal notranslate"><span class="pre">LOCAL_RANK</span></code>. Contribution by &#64;bd-pdomanico.</p></li>
@@ -616,11 +646,6 @@ least one environment resets. <code class="docutils literal notranslate"><span c
 <code class="docutils literal notranslate"><span class="pre">reward_manager.compute()</span></code> had already populated it. The clear now
 happens at the top of <code class="docutils literal notranslate"><span class="pre">step()</span></code> and <code class="docutils literal notranslate"><span class="pre">reset()</span></code> so that all entries
 survive (<a class="extlink-issue reference external" href="https://github.com/mujocolab/mjlab/issues/957">#957</a>).</p></li>
-<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">ManagerBasedRlEnv</span></code> initializing Warp on all visible CUDA devices
-even when constructed with <code class="docutils literal notranslate"><span class="pre">device=&quot;cpu&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">seed_rng</span></code> now accepts a
-<code class="docutils literal notranslate"><span class="pre">device</span></code> argument and skips <code class="docutils literal notranslate"><span class="pre">wp.rand_init</span></code> on CPU devices, so a
-CPU-only env no longer claims a CUDA context on machines with a visible
-GPU (<a class="extlink-issue reference external" href="https://github.com/mujocolab/mjlab/issues/949">#949</a>).</p></li>
 <li><p>Fixed <code class="docutils literal notranslate"><span class="pre">ContactSensor.compute_first_contact</span></code> and <code class="docutils literal notranslate"><span class="pre">compute_first_air</span></code>
 occasionally missing events when a contact began or ended right at the
 last physics substep of a control step. <code class="docutils literal notranslate"><span class="pre">current_contact_time</span></code> /
@@ -1257,7 +1282,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 24, 2026.
+  Last updated on May 25, 2026.
   <br/>
 </p>
   </div>
