@@ -2,6 +2,22 @@
 Changelog
 =========
 
+Upcoming version (not yet released)
+-----------------------------------
+
+Added
+^^^^^
+
+- Added ``BuiltinDcMotorActuator``, a native MuJoCo ``<dcmotor>`` wrapper.
+  Supports voltage / position / velocity input modes with back-EMF,
+  configurable motor constants, and optional integral, slew, inductance,
+  thermal, LuGre, and cogging extensions.
+
+Changed
+^^^^^^^
+
+- Bumped ``rsl-rl-lib`` from 5.2.0 to 5.4.0.
+
 Version 1.4.0 (May 26, 2026)
 ----------------------------
 
