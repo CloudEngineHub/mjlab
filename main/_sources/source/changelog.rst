@@ -17,6 +17,14 @@ Changed
 ^^^^^^^
 
 - Bumped ``rsl-rl-lib`` from 5.2.0 to 5.4.0.
+- Curriculum-mode terrain difficulty is now deterministic across rows
+  and reaches the configured ``difficulty_range`` endpoints
+  (:issue:`1027`).
+
+Fixed
+^^^^^
+
+- Fixed ``select_gpus`` crashing when ``CUDA_VISIBLE_DEVICES`` contains MIG UUIDs instead of numeric indices.
 
 Version 1.4.0 (May 26, 2026)
 ----------------------------
