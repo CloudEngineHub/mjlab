@@ -58,7 +58,7 @@
     <link rel="prev" title="Research" href="research.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Jul 01, 2026"/>
+    <meta name="docbuild:last-update" content="Jul 02, 2026"/>
   </head>
   
   
@@ -526,10 +526,19 @@ document.write(`
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">MeshCfg</span></code>, a spec editor that matches mesh assets by name and edits
 their asset-level attributes. The first attribute is <code class="docutils literal notranslate"><span class="pre">maxhullvert</span></code>, which
 caps the collision convex hull’s vertex count to lower narrowphase cost.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">SimulationCfg.broadphase</span></code> and <code class="docutils literal notranslate"><span class="pre">SimulationCfg.broadphase_filter</span></code>
+to configure MuJoCo Warp’s broadphase collision algorithm and
+bounding-volume filters.</p></li>
 </ul>
 </section>
 <section id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Command delay on fusable actuators (ideal PD, DC motor) now applies one shared
+lag per environment across all fused actuators sharing a delay config, matching
+the built-in actuator path, rather than an independent lag per actuator group
+(<a class="extlink-issue reference external" href="https://github.com/mujocolab/mjlab/issues/1035">#1035</a>).</p></li>
+</ul>
 </section>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
@@ -539,6 +548,11 @@ caps the collision convex hull’s vertex count to lower narrowphase cost.</p></
 outside <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">1]</span></code>, making <code class="docutils literal notranslate"><span class="pre">torch.acos</span></code> return NaN and silently
 suppressing the termination for flipped robots. The argument is now clamped
 to <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">1]</span></code>.</p></li>
+<li><p>Fixed a crash when using command delay on ideal PD (or other custom)
+actuators whenever <code class="docutils literal notranslate"><span class="pre">num_envs</span></code> differed from the number of delayed targets,
+and fused ideal PD and DC motor actuators sharing a transmission and delay
+config into a single gather, delay, control-law evaluation, and control
+write, removing per-group host overhead (<a class="extlink-issue reference external" href="https://github.com/mujocolab/mjlab/issues/1035">#1035</a>).</p></li>
 </ul>
 </section>
 </section>
@@ -1447,7 +1461,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jul 01, 2026.
+  Last updated on Jul 02, 2026.
   <br/>
 </p>
   </div>
