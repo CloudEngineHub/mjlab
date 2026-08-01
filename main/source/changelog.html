@@ -58,7 +58,7 @@
     <link rel="prev" title="Research" href="research.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Jul 29, 2026"/>
+    <meta name="docbuild:last-update" content="Aug 01, 2026"/>
   </head>
   
   
@@ -538,6 +538,10 @@ document.write(`
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">GeomCfg</span></code>, exposed as the <code class="docutils literal notranslate"><span class="pre">geoms</span></code> field on <code class="docutils literal notranslate"><span class="pre">EntityCfg</span></code>, a spec
+editor that matches geoms by name and edits their attributes. Currently
+supports <code class="docutils literal notranslate"><span class="pre">group</span></code>, so a geom can collide without being drawn.
+Contribution by &#64;bd-pmorais.</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">diffuse</span></code>, <code class="docutils literal notranslate"><span class="pre">specular</span></code>, <code class="docutils literal notranslate"><span class="pre">ambient</span></code>, <code class="docutils literal notranslate"><span class="pre">active</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">attenuation</span></code> fields to <code class="docutils literal notranslate"><span class="pre">LightCfg</span></code> for configuring light color and
 falloff. Contribution by &#64;bd-pmorais.</p></li>
@@ -556,6 +560,12 @@ falloff. Contribution by &#64;bd-pmorais.</p></li>
 </section>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RayCastSensorCfg.include_geom_groups</span></code> now raises on values outside
+<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">mjNGROUP)</span></code> instead of silently excluding every geom.</p></li>
+<li><p>Geoms with a negative group no longer pick up group 5’s visibility toggle in
+the Viser viewer.</p></li>
+</ul>
 </section>
 </section>
 <section id="version-1-5-3-july-22-2026">
@@ -1604,7 +1614,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jul 29, 2026.
+  Last updated on Aug 01, 2026.
   <br/>
 </p>
   </div>

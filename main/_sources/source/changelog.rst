@@ -8,6 +8,10 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Added ``GeomCfg``, exposed as the ``geoms`` field on ``EntityCfg``, a spec
+  editor that matches geoms by name and edits their attributes. Currently
+  supports ``group``, so a geom can collide without being drawn.
+  Contribution by @bd-pmorais.
 - Added ``diffuse``, ``specular``, ``ambient``, ``active``, and
   ``attenuation`` fields to ``LightCfg`` for configuring light color and
   falloff. Contribution by @bd-pmorais.
@@ -24,6 +28,11 @@ Changed
 
 Fixed
 ^^^^^
+
+- ``RayCastSensorCfg.include_geom_groups`` now raises on values outside
+  ``[0, mjNGROUP)`` instead of silently excluding every geom.
+- Geoms with a negative group no longer pick up group 5's visibility toggle in
+  the Viser viewer.
 
 Version 1.5.3 (July 22, 2026)
 -----------------------------
