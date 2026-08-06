@@ -13,6 +13,12 @@ Upcoming version (not yet released)
      MuJoCo's values, and dict values for these fields must cover every
      matched geom (add a catch-all ``".*"`` entry).
 
+.. admonition:: Highlights
+   :class: note
+
+   - Upgraded to MuJoCo and MuJoCo Warp 3.11.
+   - Upgraded ``rsl-rl-lib`` to 5.4.2.
+
 Added
 ^^^^^
 
@@ -35,10 +41,19 @@ Added
 - Added ``reduce="sum"`` to ``MetricsTermCfg`` for reporting the accumulated
   episode total (e.g. episodic reward, total distance traveled) instead of a
   per-step average. Contribution by @bd-mlutter
+- Added ``dr.mat_texid`` to randomize which texture fills a given
+  ``mjtTextureRole`` slot (RGB by default) of each selected material,
+  sampling uniformly from ``asset_cfg.texture_names``. Contribution by
+  @bd-pmorais.
+
+.. figure:: _static/changelog/mat_texid_dr.gif
+   :width: 30%
 
 Changed
 ^^^^^^^
 
+- Bumped ``mujoco`` and ``mujoco-warp`` from 3.10 to 3.11, and regenerated the
+  bundled MuJoCo type stubs.
 - Bumped ``rsl-rl-lib`` from 5.4.0 to 5.4.2.
 - ``CollisionCfg`` and ``GeomCfg`` now share one write path, and mjlab warns
   when a ``GeomCfg`` collision patch is overwritten by a ``CollisionCfg``.
