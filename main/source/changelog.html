@@ -58,7 +58,7 @@
     <link rel="prev" title="Research" href="research.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 12, 2026"/>
+    <meta name="docbuild:last-update" content="Oct 13, 2026"/>
   </head>
   
   
@@ -544,6 +544,9 @@ document.write(`
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Added a <code class="docutils literal notranslate"><span class="pre">cu126</span></code> extra (<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span> <span class="pre">--extra</span> <span class="pre">cu126</span></code>) that installs torch built for
+CUDA 12.6, for machines whose NVIDIA driver is older than 580. It does not include
+kernels for Blackwell GPUs.</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">SimulationCfg.graph_conditional</span></code> to toggle MuJoCo Warp’s CUDA graph
 conditional nodes, which require CUDA 12.4 or newer.</p></li>
 </ul>
@@ -1790,7 +1793,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Oct 12, 2026.
+  Last updated on Oct 13, 2026.
   <br/>
 </p>
   </div>
